@@ -1,10 +1,12 @@
+import { Button } from '@mui/material';
+import { FC } from 'react';
 
-const App = () => {
+const App: FC = () => {
   return (
-    <h1>
-      Hello World
-    </h1>
+    <Button>
+      Hello World!
+    </Button>
   );
-};
+}
 
 export default App;

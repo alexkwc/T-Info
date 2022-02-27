@@ -1,10 +1,11 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Router from './routers';
 
 ReactDOM.render(
   <StrictMode>
-    <App />
+    <Router />
   </StrictMode>,
+  // eslint-disable-next-line no-undef
   document.getElementById('root'),
 );

@@ -34,10 +34,10 @@ MVP
 ## Implementation Plans
 
 The development plan is the following order
-  1. FE boostrap
-  2. BE boostrap
-  3. Add 1 e2e workflow with identity
-  4. Add Cloud deployment manager templates
-  5. Create pipeline to deploy templates
-  6. Update pipeline to deploy the full stack
-  7. Add the remaining e2e flow
+  1. [x] FE boostrap
+  2. [ ] BE boostrap
+  3. [ ] Add 1 e2e workflow with identity
+  4. [ ] Add Cloud deployment manager templates
+  5. [ ] Create pipeline to deploy templates
+  6. [ ] Update pipeline to deploy the full stack
+  7. [ ] Add the remaining e2e flow

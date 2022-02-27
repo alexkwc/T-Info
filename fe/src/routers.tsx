@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SidebarLayout from './layout/sidebar';
 import Sidebar from './sidebar';
+import ViewPage from './view';
 
 function Router() {
   return (
@@ -8,7 +9,7 @@ function Router() {
       <Routes>
         <Route element={<SidebarLayout><Sidebar /></SidebarLayout>}>
           <Route path="/" element="Homepage" />
-          <Route path="test" element="Test" />
+          <Route path="/view" element={<ViewPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

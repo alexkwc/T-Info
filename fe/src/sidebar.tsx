@@ -22,7 +22,7 @@ function Sidebar(): ReactElement {
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button key="test" onClick={() => navigate('/test')}>
+        <ListItem button key="test" onClick={() => navigate('/view')} disabled>
           <ListItemIcon>
             <MailIcon />
           </ListItemIcon>

@@ -1,9 +1,10 @@
 import { Box, Drawer } from '@mui/material';
+import { ReactNode } from 'react';
 import { Outlet } from 'react-router-dom';
 
 const drawerWidth = 240;
 
-function SidebarLayout({ children }) {
+function SidebarLayout({ children }: { children: ReactNode }) {
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer

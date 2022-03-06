@@ -1,36 +1,35 @@
-import admin from "firebase-admin";
-import UserType from "../types/user";
+/* eslint-disable max-len */
+import dateScalar from "../scalar/date";
+import IntelType, {IntelName} from "../types/intel";
+import functions from "firebase-functions";
+import {getFirestore} from "firebase-admin/firestore";
+import {initializeApp} from "firebase-admin/app";
 
-admin.initializeApp();
+initializeApp(functions.config().firebase);
 
-const db = admin.firestore();
-const userCollection = db.collection("users");
-const fetchAllUsers = async (callback: (data: unknown) => void) => {
-  userCollection.get().then(
-      (item) => {
-        const items: unknown[] = [];
-        item.docs.forEach((item) => {
-          items.push(item.data());
-        });
-        return callback(items);
-      }
-  ).catch(console.log);
-};
+const db = getFirestore();
+const intelCollection = db.collection(IntelName);
 
+const createdAt = "createdAt" as const;
 const resolvers = {
+  Date: dateScalar,
   Query: {
-    users: () => {
-      return new Promise((resolve) => {
-        fetchAllUsers(resolve);
-      });
+    intels: async (): Promise<IntelType[]> => {
+      const docs = (await intelCollection.get()).docs;
+      return docs.map((i) => i.data() as IntelType);
+    },
+    intelsByLocation: async (_: unknown, {x, y}: {x: number, y: number}): Promise<IntelType[]> => {
+      const docs = (await intelCollection.where("x", "==", x).where("y", "==", y).orderBy(createdAt, "desc").get()).docs;
+      return docs.map((i) => i.data() as IntelType);
     },
   },
   Mutation: {
-    addUser: async (
+    reportIntel: async (
         _: unknown,
-        user: UserType
-    ): Promise<void> => {
-      await userCollection.add(user);
+        intel: Omit<IntelType, typeof createdAt>
+    ): Promise<IntelType> => {
+      const result = await intelCollection.add({...intel, createdAt: +new Date()});
+      return (await result.get()).data() as IntelType;
     },
   },
 };
